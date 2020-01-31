@@ -15,6 +15,12 @@ HOLTER_HOURS = [
     ('48:00 H', '48:00 H'),
 ]
 
+EMERGENCY_STATUS = [
+    ('ACCEPTED','ACCEPTED'),
+    ('REJECTED','REJECTED'),
+    ('NOT_SEEN','NOT_SEEN'),
+]
+
 # Create your models here.
 
 class Token(models.Model):
@@ -31,6 +37,7 @@ class Profiles(models.Model):
     user = models.ForeignKey(User , on_delete=models.CASCADE)
     first_name = models.CharField(max_length=20, blank=True, default='')
     last_name = models.CharField(max_length=20, blank=True, default='')
+    emergency_request = models.BooleanField(default=False)
     phone_number = models.CharField(max_length=11, blank=True, default='')
     mobile_number = models.CharField(max_length=11, blank=True, default='')
     age = models.CharField(max_length=3, blank=True, default='')
@@ -48,14 +55,16 @@ class Profiles(models.Model):
 class patientData(models.Model):  #patient information
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    angina = models.BooleanField()
-    history_of_mi = models.BooleanField()
-    prior_cath = models.BooleanField()
-    prior_cabg = models.BooleanField()
-    smoking = models.BooleanField()
-    diabetic = models.BooleanField()
-    family_history = models.BooleanField()
-    paec_maker = models.BooleanField()
+    emergency_status = models.CharField(max_length=50, choices=EMERGENCY_STATUS,default='NOT_SEEN')
+    hospitalization = models.CharField(max_length=250, blank=True, default='')
+    angina = models.BooleanField(default=False)
+    history_of_mi = models.BooleanField(default=False)
+    prior_cath = models.BooleanField(default=False)
+    prior_cabg = models.BooleanField(default=False)
+    smoking = models.BooleanField(default=False)
+    diabetic = models.BooleanField(default=False)
+    family_history = models.BooleanField(default=False)
+    paec_maker = models.BooleanField(default=False)
     indications = models.CharField(max_length=120, blank=True, default='')
     medications = models.CharField(max_length=120, blank=True, default='')
     procedure_type = models.CharField(max_length=10, choices=HOLTER_HOURS,default='MR')

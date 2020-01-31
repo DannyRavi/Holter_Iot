@@ -10,9 +10,6 @@ class ProfilesSerializer(serializers.ModelSerializer):
         model = Profiles
         fields = "__all__"
 
-   
-        # fields = ('id', 'user', 'nation_code', 'first_name', 'last_name', 'age')
-
 class UserSerializer(serializers.ModelSerializer):
     snippetz = serializers.PrimaryKeyRelatedField(many=True, queryset=Profiles.objects.all())
 
@@ -24,7 +21,7 @@ class UserSerializer(serializers.ModelSerializer):
 class short_Patient_Profiles_Serializer(serializers.ModelSerializer):
     class Meta:
         model = Profiles
-        fields = ('user', 'first_name','last_name','nation_code')
+        fields = ('user', 'first_name','last_name','nation_code','emergency_request')
 
 
 class all_Patient_data_Serializer(serializers.ModelSerializer):
@@ -36,4 +33,4 @@ class all_Patient_data_Serializer(serializers.ModelSerializer):
 class short_Patient_data_Serializer(serializers.ModelSerializer):
     class Meta:
         model = patientData
-        fields = ('user', 'indications','medications','technicain_name')
+        fields = ('user', 'indications','medications','technicain_name','emergency_status','hospitalization')
