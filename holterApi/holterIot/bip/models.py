@@ -4,6 +4,12 @@ from django.forms import ModelForm
 from datetime import datetime
 from django.contrib.auth.models import User
 from django.utils.crypto import get_random_string
+#from django_matplotlib import MatplotlibFigureField
+from django_matplotlib.fields import MatplotlibFigureField
+
+
+import pandas as pd 
+import matplotlib.pyplot as plt
 
 TITLE_CHOICES = [
     ('MR', 'Mr.'),
@@ -30,8 +36,20 @@ class Token(models.Model):
     def __unicode__(self):
         return "{}_token".format(self.user)
 
+data = pd.read_csv("ECG2.csv") 
+# Preview the first 5 lines of the loaded data 
 
+print(data.head())
+class MyModelWithFigure(models.Model):
+    # ... other fields
+    # figures.py should be in the same directory where models.py is placed.
+    # see  ./django_matplotlib/figures.py for example.
+    fig = MatplotlibFigureField(figure='test_figure', verbose_name='figure',
+                                silent=True)
+    # ... other fields
 # Create your models here.
+class MyModel(models.Model):
+    figure = MatplotlibFigureField(figure='my_figure')
 class Profiles(models.Model):
 
     user = models.ForeignKey(User , on_delete=models.CASCADE)

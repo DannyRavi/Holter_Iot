@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'bip.apps.BipConfig',
     'rest_framework.authtoken',
+    'django_matplotlib',
 ]
 
 MIDDLEWARE = [

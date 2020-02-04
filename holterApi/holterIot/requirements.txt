@@ -2,3 +2,5 @@ Django==2.2.3
 djangorestframework==3.9.4
 pytz==2019.1
 sqlparse==0.3.0
+django-matplotlib==0.1
+ecg-plot==0.2.2
