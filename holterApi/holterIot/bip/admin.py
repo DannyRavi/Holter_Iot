@@ -9,4 +9,4 @@ admin.site.register(Profiles)
 admin.site.register(patientData)
 admin.site.register(Token)
 
-admin.site.register(MyModel)
+admin.site.register(DataPlot)

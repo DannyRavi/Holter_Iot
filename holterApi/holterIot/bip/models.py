@@ -36,10 +36,14 @@ class Token(models.Model):
     def __unicode__(self):
         return "{}_token".format(self.user)
 
-data = pd.read_csv("ECG2.csv") 
+#!data = pd.read_csv("ECG2.csv") 
+#data = pd.read_csv('https://github.com/DannyRavi/holterPloter/blob/master/ECG2.csv') 
 # Preview the first 5 lines of the loaded data 
+url = 'https://raw.githubusercontent.com/DannyRavi/holterPloter/master/ECG2.csv'
+data = pd.read_csv(url, error_bad_lines=False)
+# print(data.head())
 
-print(data.head())
+
 class MyModelWithFigure(models.Model):
     # ... other fields
     # figures.py should be in the same directory where models.py is placed.
@@ -48,7 +52,7 @@ class MyModelWithFigure(models.Model):
                                 silent=True)
     # ... other fields
 # Create your models here.
-class MyModel(models.Model):
+class DataPlot(models.Model):
     figure = MatplotlibFigureField(figure='my_figure')
 class Profiles(models.Model):
 
