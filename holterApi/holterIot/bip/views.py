@@ -5,8 +5,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from json import JSONEncoder
 from datetime import datetime
-from .serializers import ProfilesSerializer ,UserSerializer, short_Patient_Profiles_Serializer,short_Patient_data_Serializer , all_Patient_data_Serializer
-
+from .serializers import ProfileSerializer ,UserSerializer, EmergencySerializer ,AllDataSerializer,PatientSerializer
 from django.conf import settings
 from django.shortcuts import render, get_object_or_404
 from django.db.models import Sum, Count
@@ -31,44 +30,47 @@ from rest_framework.status import (
 )
 from rest_framework.response import Response
 
-from .models import Profiles ,patientData
+from .models import Profiles 
 # Create your views here.
 
-class ProfilesList(generics.ListCreateAPIView):
+class allDataList(generics.ListCreateAPIView):
     queryset = Profiles.objects.all()
-    serializer_class = ProfilesSerializer
+    serializer_class = AllDataSerializer
 
 
-class ProfilesDetail(generics.RetrieveUpdateDestroyAPIView):
+class allDataDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Profiles.objects.all()
-    serializer_class = ProfilesSerializer
+    serializer_class = AllDataSerializer
+
+class profilesList(generics.ListCreateAPIView):
+    queryset = Profiles.objects.all()
+    serializer_class = ProfileSerializer
+
+
+class profilesDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Profiles.objects.all()
+    serializer_class = ProfileSerializer
+
+
+class emergencyList(generics.ListCreateAPIView):
+    queryset = Profiles.objects.all()
+    serializer_class = EmergencySerializer
+
+class emergencyDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Profiles.objects.all()
+    serializer_class = EmergencySerializer
 
 
 class patientList(generics.ListCreateAPIView):
-    queryset = patientData.objects.all()
-    serializer_class = all_Patient_data_Serializer
+    queryset = Profiles.objects.all()
+    serializer_class = PatientSerializer
 
 class patientDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = patientData.objects.all()
-    serializer_class = all_Patient_data_Serializer
+    queryset = Profiles.objects.all()
+    serializer_class = PatientSerializer
 
 #'''kefa'''
-class short_Patient_profile_List(generics.ListCreateAPIView):
-    queryset = Profiles.objects.all()
-    serializer_class = short_Patient_Profiles_Serializer
 
-class short_Patient_profile_Retrieve(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Profiles.objects.all()
-    serializer_class = short_Patient_Profiles_Serializer
-
-
-class short_Patient_data_List(generics.ListCreateAPIView):
-    queryset = patientData.objects.all()
-    serializer_class = short_Patient_data_Serializer
-
-class short_Patient_data_Retrieve(generics.RetrieveUpdateDestroyAPIView):
-    queryset = patientData.objects.all()
-    serializer_class = short_Patient_data_Serializer    
 # @csrf_exempt
 # @require_POST
 # def query_expenses(request):

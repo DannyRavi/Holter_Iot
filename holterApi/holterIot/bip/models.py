@@ -36,7 +36,7 @@ class Token(models.Model):
     def __unicode__(self):
         return "{}_token".format(self.user)
 
-#!data = pd.read_csv("ECG2.csv") 
+#data = pd.read_csv("ECG2.csv") 
 #data = pd.read_csv('https://github.com/DannyRavi/holterPloter/blob/master/ECG2.csv') 
 # Preview the first 5 lines of the loaded data 
 url = 'https://raw.githubusercontent.com/DannyRavi/holterPloter/master/ECG2.csv'
@@ -55,11 +55,9 @@ class MyModelWithFigure(models.Model):
 class DataPlot(models.Model):
     figure = MatplotlibFigureField(figure='my_figure')
 class Profiles(models.Model):
-
     user = models.ForeignKey(User , on_delete=models.CASCADE)
     first_name = models.CharField(max_length=20, blank=True, default='')
     last_name = models.CharField(max_length=20, blank=True, default='')
-    emergency_request = models.BooleanField(default=False)
     phone_number = models.CharField(max_length=11, blank=True, default='')
     mobile_number = models.CharField(max_length=11, blank=True, default='')
     age = models.CharField(max_length=3, blank=True, default='')
@@ -71,12 +69,7 @@ class Profiles(models.Model):
     postal_code = models.CharField(max_length=15, blank=True, default='')
     email = models.EmailField(max_length=70,blank=True, null= True)
     gender = models.CharField(max_length=3, choices=TITLE_CHOICES,default='MR')
-    def __unicode__(self):
-        return "{}-{}-{}-{}".format(self.user, self.nation_code, self.first_name, self.last_name)
-
-class patientData(models.Model):  #patient information
-
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    emergency_request = models.BooleanField(default=False)
     emergency_status = models.CharField(max_length=50, choices=EMERGENCY_STATUS,default='NOT_SEEN')
     hospitalization = models.CharField(max_length=250, blank=True, default='')
     angina = models.BooleanField(default=False)
@@ -91,11 +84,12 @@ class patientData(models.Model):  #patient information
     medications = models.CharField(max_length=120, blank=True, default='')
     procedure_type = models.CharField(max_length=10, choices=HOLTER_HOURS,default='MR')
     referring_physician = models.CharField(max_length=30, blank=True, default='')
-    notes = models.CharField(max_length=250, blank=True, default='')
+    note = models.CharField(max_length=250, blank=True, default='')
     technicain_name = models.CharField(max_length=30, blank=True, default='')
     attending_phy = models.CharField(max_length=30, blank=True, default='')
     request_time_data = models.DateTimeField(default=datetime.now, blank=True)
     location = models.CharField(max_length=30, blank=True, default='')
-
     def __unicode__(self):
-        return "{}-{}-{}".format(self.user, self.technicain_name, self.attending_phy)
+        return "{}-{}-{}-{}-{}-{}".format(self.user, self.nation_code, self.first_name, self.last_name, self.technicain_name, self.attending_phy)
+
+

@@ -8,6 +8,7 @@ def my_figure():
 
     url = 'https://raw.githubusercontent.com/DannyRavi/holterPloter/master/ECG2.csv'
     data = pd.read_csv(url, error_bad_lines=False) 
+    #data = pd.read_csv("ECG2.csv") 
     fig, ax = plt.subplots()
     v1 = []
     v1 = data.V2

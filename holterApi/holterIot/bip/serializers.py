@@ -1,14 +1,10 @@
 from rest_framework import serializers
-from .models import Profiles ,patientData
+from .models import Profiles 
 import re
 from rest_framework.exceptions import ValidationError
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
 
-class ProfilesSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Profiles
-        fields = "__all__"
 
 class UserSerializer(serializers.ModelSerializer):
     snippetz = serializers.PrimaryKeyRelatedField(many=True, queryset=Profiles.objects.all())
@@ -17,20 +13,25 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ('id', 'username')
 
-
-class short_Patient_Profiles_Serializer(serializers.ModelSerializer):
+class AllDataSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profiles
-        fields = ('user', 'first_name','last_name','nation_code','emergency_request')
-
-
-class all_Patient_data_Serializer(serializers.ModelSerializer):
-    class Meta:
-        model = patientData
         fields = "__all__"
 
-
-class short_Patient_data_Serializer(serializers.ModelSerializer):
+class EmergencySerializer(serializers.ModelSerializer):
     class Meta:
-        model = patientData
-        fields = ('user', 'indications','medications','technicain_name','emergency_status','hospitalization')
+        model = Profiles
+        fields = ('user','id', 'first_name','last_name','nation_code','emergency_request','emergency_status','hospitalization')
+
+
+
+class ProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Profiles
+        fields = ('user','id','first_name','last_name','phone_number','mobile_number','age','group','nation_code','height','weigth ','address','postal_code','email','gender')
+
+
+class PatientSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Profiles
+        fields =  ('user','id','emergency_request','emergency_status','hospitalization','angina','history_of_mi','prior_cath','prior_cabg','smoking','diabetic','family_history','paec_maker','indications','medications','procedure_type','referring_physician','notes','technicain_name','attending_phy','request_time_data', 'location')

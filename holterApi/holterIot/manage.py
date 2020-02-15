@@ -19,4 +19,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-# admin my pass=123456798
