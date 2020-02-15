@@ -6,7 +6,7 @@ import ecg_plot
 
 def my_figure():
 
-    url = 'https://raw.githubusercontent.com/DannyRavi/holterPloter/master/ECG2.csv'
+    url = 'https://raw.githubusercontent.com/DannyRavi/Holter_Iot/master/holterApi/holterIot/ECG2.csv'
     data = pd.read_csv(url, error_bad_lines=False) 
     #data = pd.read_csv("ECG2.csv") 
     fig, ax = plt.subplots()

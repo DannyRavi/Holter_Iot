@@ -39,7 +39,7 @@ class Token(models.Model):
 #data = pd.read_csv("ECG2.csv") 
 #data = pd.read_csv('https://github.com/DannyRavi/holterPloter/blob/master/ECG2.csv') 
 # Preview the first 5 lines of the loaded data 
-url = 'https://raw.githubusercontent.com/DannyRavi/holterPloter/master/ECG2.csv'
+url = 'https://raw.githubusercontent.com/DannyRavi/Holter_Iot/master/holterApi/holterIot/ECG2.csv'
 data = pd.read_csv(url, error_bad_lines=False)
 # print(data.head())
 
